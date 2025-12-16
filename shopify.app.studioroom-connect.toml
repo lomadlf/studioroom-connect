@@ -1,0 +1,33 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "e5b24ba13a38bb1416e089a35374c124"
+name = "StudioRoom Connect"
+application_url = "https://studioroom-connect.vercel.app/app"
+embedded = true
+
+[webhooks]
+api_version = "2025-10"
+
+# ✅ GDPR / Privacy compliance (OBLIGATOIRE)
+[[webhooks.subscriptions]]
+compliance_topics = [
+  "customers/data_request",
+  "customers/redact",
+  "shop/redact"
+]
+uri = "https://hhmlkbshoxzbmvgflbzl.supabase.co/functions/v1/shopify-webhooks"
+
+# ✅ Webhook classique
+[[webhooks.subscriptions]]
+topic = "app/uninstalled"
+uri = "https://hhmlkbshoxzbmvgflbzl.supabase.co/functions/v1/shopify-webhooks"
+
+[access_scopes]
+scopes = "read_files,write_files,write_inventory,read_inventory,read_products,write_products"
+optional_scopes = []
+use_legacy_install_flow = false
+
+[auth]
+redirect_urls = [
+  "https://hhmlkbshoxzbmvgflbzl.supabase.co/functions/v1/shopify-oauth-callback"
+]
