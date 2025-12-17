@@ -1,71 +1,66 @@
-import type {
-  HeadersFunction,
-  LoaderFunctionArgs,
-} from "react-router";
+import type { HeadersFunction, LoaderFunctionArgs } from "react-router";
 import { authenticate } from "../shopify.server";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 
-/**
- * Loader
- * - Ensures the app is embedded
- * - Ensures the merchant is authenticated
- */
+import {
+  Page,
+  Card,
+  Text,
+  Button,
+  Badge,
+  InlineStack,
+  BlockStack,
+} from "@shopify/polaris";
+
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   await authenticate.admin(request);
   return null;
 };
 
-/**
- * Main App Home
- * Minimal embedded UI required for Shopify review
- */
 export default function Index() {
   return (
-    <s-page heading="StudioRoom Connect">
-      <s-section>
-        <s-paragraph>
-          StudioRoom Connect allows merchants to link their Shopify store
-          with their StudioRoom account.
-        </s-paragraph>
+    <Page title="StudioRoom Connect">
+      <BlockStack gap="400">
+        <Card>
+          <BlockStack gap="300">
+            <Text as="p">
+              StudioRoom Connect allows merchants to link their Shopify store
+              with their StudioRoom account.
+            </Text>
 
-        <s-paragraph>
-          Product images are processed externally on studioroom.fr.
-          No product data is modified without explicit user action.
-        </s-paragraph>
+            <Text as="p" tone="subdued">
+              Product images are processed externally on studioroom.fr.
+              No product data is modified without explicit user action.
+            </Text>
 
-        <s-stack direction="inline" gap="base">
-          <s-badge tone="success">Account connected</s-badge>
-        </s-stack>
+            <InlineStack gap="200">
+              <Badge tone="success">Account connected</Badge>
+            </InlineStack>
 
-        <s-stack
-          direction="inline"
-          gap="base"
-          style={{ marginTop: "1rem" }}
-        >
-          <s-button
-            variant="primary"
-            href="https://studioroom.fr/dashboard"
-            target="_blank"
-          >
-            Open StudioRoom
-          </s-button>
+            <InlineStack gap="200">
+              <Button
+                variant="primary"
+                url="https://studioroom.fr/dashboard"
+                target="_blank"
+              >
+                Open StudioRoom
+              </Button>
 
-          <s-button variant="secondary" tone="critical">
-            Disconnect account
-          </s-button>
-        </s-stack>
+              <Button tone="critical">
+                Disconnect account
+              </Button>
+            </InlineStack>
 
-        <s-paragraph tone="subdued" style={{ marginTop: "1rem" }}>
-          You can disconnect your account at any time.
-        </s-paragraph>
-      </s-section>
-    </s-page>
+            <Text as="p" tone="subdued">
+              You can disconnect your account at any time.
+            </Text>
+          </BlockStack>
+        </Card>
+      </BlockStack>
+    </Page>
   );
 }
 
-/**
- * Required headers for Shopify embedded apps
- */
 export const headers: HeadersFunction = (headersArgs) => {
   return boundary.headers(headersArgs);
 };
