@@ -6,9 +6,10 @@ import {
   Page,
   Layout,
   Text,
-  Stack,
   Badge,
   Button,
+  InlineStack,
+  BlockStack,
 } from "@shopify/polaris";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -21,30 +22,34 @@ export default function Index() {
     <Page title="StudioRoom Connect">
       <Layout>
         <Layout.Section>
-          <Text as="p">
-            StudioRoom Connect allows merchants to link their Shopify store
-            with their StudioRoom account.
-          </Text>
+          <BlockStack gap="400">
+            <Text variant="bodyMd">
+              StudioRoom Connect allows merchants to link their Shopify store
+              with their StudioRoom account.
+            </Text>
 
-          <Text as="p" tone="subdued">
-            Product images are processed externally on studioroom.fr.
-          </Text>
+            <Text variant="bodySm" tone="subdued">
+              Product images are processed externally on studioroom.fr.
+            </Text>
 
-          <Stack inline>
-            <Badge tone="success">Account connected</Badge>
-          </Stack>
+            <InlineStack gap="200">
+              <Badge tone="success">Account connected</Badge>
+            </InlineStack>
 
-          <Stack inline gap="200" style={{ marginTop: "1rem" }}>
-            <Button
-              variant="primary"
-              url="https://studioroom.fr/dashboard"
-              external
-            >
-              Open StudioRoom
-            </Button>
+            <InlineStack gap="200">
+              <Button
+                variant="primary"
+                url="https://studioroom.fr/dashboard"
+                external
+              >
+                Open StudioRoom
+              </Button>
 
-            <Button tone="critical">Disconnect account</Button>
-          </Stack>
+              <Button tone="critical">
+                Disconnect account
+              </Button>
+            </InlineStack>
+          </BlockStack>
         </Layout.Section>
       </Layout>
     </Page>
