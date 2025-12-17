@@ -1,3 +1,5 @@
+import "@shopify/polaris/build/esm/styles.css";
+
 import { PassThrough } from "stream";
 import { renderToPipeableStream } from "react-dom/server";
 import { ServerRouter } from "react-router";
