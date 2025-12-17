@@ -1,4 +1,13 @@
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
+import {
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+} from "react-router";
+
+import { AppProvider } from "@shopify/polaris";
+import polarisTranslations from "@shopify/polaris/locales/en.json";
 
 export default function App() {
   return (
@@ -15,10 +24,14 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <AppProvider i18n={polarisTranslations}>
+          <Outlet />
+        </AppProvider>
+
         <ScrollRestoration />
         <Scripts />
       </body>
     </html>
   );
 }
+
