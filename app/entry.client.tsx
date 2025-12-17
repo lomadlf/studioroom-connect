@@ -1,4 +1,14 @@
 import { hydrateRoot } from "react-dom/client";
-import { ClientRouter } from "react-router";
+import { RouterProvider } from "react-router";
+import { createRouter } from "@react-router/dev";
 
-hydrateRoot(document, <ClientRouter />);
+import routes from "./routes";
+
+const router = createRouter({
+  routes,
+});
+
+hydrateRoot(
+  document,
+  <RouterProvider router={router} />
+);
